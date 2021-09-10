@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,10 @@ namespace hello.Controllers
         }
 
         [HttpPost]
-        public string  PostTodoItem(ArenaUpdate arenaUpdate)
+        public string PostTodoItem(dynamic data)
         {
-            Console.WriteLine(arenaUpdate);
+            var v = JsonConvert.DeserializeObject<ArenaUpdate>(data.ToString());
+            Console.WriteLine(data.ToString());
             try
             {
                 string[] commands = new string[] { "F", "R", "L", "T" };
